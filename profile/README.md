@@ -14,7 +14,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/bitfl0wer/Polyphony">
+  <a href="https://github.com/polyphony-chat/client">
     <img src="images/polyphony.png" alt="Logo" width="128" height="128">
   </a>
 
