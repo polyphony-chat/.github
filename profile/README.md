@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/polyphony-chat/client">
-    <img src="images/polyphony.png" alt="Logo" width="128" height="128">
+    <img src="https://raw.githubusercontent.com/polyphony-chat/.github/main/polyphony-2-4-8bit.png" alt="Logo" width="128" height="128">
   </a>
 
 <h3 align="center">Polyphony</h3>
@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Product Mockup](images/mockup.png)
+![Product Mockup](https://github.com/polyphony-chat/client/blob/main/images/mockup.png?raw=true)
 <cite>*A mockup of the Polyphony client.*</cite>
 
 Polyphony will be a multi-instance, Discord/Fosscord API-compatible chat client, written in Rust and Svelte (TypeScript) using Tauri. The three goals of this project are ease-of-use, user experience and performance.
