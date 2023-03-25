@@ -1,16 +1,6 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 
-<div align="center">
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![GPL3 License][license-shield]][license-url]
-
-</div>
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -23,12 +13,12 @@
   <p align="center">
     A multi-instance, Discord/Fosscord API-compatible chat client, written in Rust and Svelte (TypeScript) using Tauri.
     <br />
-    <a href="https://github.com/bitfl0wer/Polyphony"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/polyphony-chat/client"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/bitfl0wer/Polyphony/issues">Report Bug</a>
+    <a href="https://github.com/polyphony-chat/client/issues">Report Bug</a>
     ·
-    <a href="https://github.com/bitfl0wer/Polyphony/issues">Request Feature</a>
+    <a href="https://github.com/polyphony-chat/client/issues">Request Feature</a>
   </p>
 </div>
 
@@ -61,9 +51,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- TODO>
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
--->
+![Product Mockup](images/mockup.png)
+<cite>*A mockup of the Polyphony client.*</cite>
 
 Polyphony will be a multi-instance, Discord/Fosscord API-compatible chat client, written in Rust and Svelte (TypeScript) using Tauri. The three goals of this project are ease-of-use, user experience and performance.
 
@@ -107,7 +96,7 @@ This is an example of how to list things you need to use the software and how to
 2. Clone the repo
 
    ```sh
-   git clone https://github.com/bitfl0wer/Polyphony.git
+   git clone https://github.com/polyphony-chat/client.git
    ```
 
 3. Install NPM packages
@@ -143,12 +132,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 * [ ] Feature 3
   * [ ] Nested Feature
 
-See the [open issues](https://github.com/bitfl0wer/Polyphony/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/polyphony-chat/client/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
+
+Read: [Polyphony Design and collaboration guidelines](https://github.com/polyphony-chat/client/wiki/Design-Guidelines-for-collaborating-on-Polyphony)
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -175,7 +166,7 @@ Distributed under the GPLv3 License. See `LICENSE.txt` for more information.
 
 florian@pro-weber.com
 
-Project Link: [https://github.com/bitfl0wer/Polyphony](https://github.com/bitfl0wer/Polyphony)
+Project Link: [https://github.com/polyphony-chat/client](https://github.com/polyphony-chat/client)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -191,16 +182,16 @@ Project Link: [https://github.com/bitfl0wer/Polyphony](https://github.com/bitfl0
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/bitfl0wer/Polyphony.svg?style=plastic
-[contributors-url]: https://github.com/bitfl0wer/Polyphony/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/bitfl0wer/Polyphony.svg?style=plastic
-[forks-url]: https://github.com/bitfl0wer/Polyphony/network/members
-[stars-shield]: https://img.shields.io/github/stars/bitfl0wer/Polyphony.svg?style=plastic
-[stars-url]: https://github.com/bitfl0wer/Polyphony/stargazers
-[issues-shield]: https://img.shields.io/github/issues/bitfl0wer/Polyphony.svg?style=plastic
-[issues-url]: https://github.com/bitfl0wer/Polyphony/issues
-[license-shield]: https://img.shields.io/github/license/bitfl0wer/Polyphony.svg?style=plastic
-[license-url]: https://github.com/bitfl0wer/Polyphony/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/polyphony-chat/client.svg?style=plastic
+[contributors-url]: https://github.com/polyphony-chat/client/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/polyphony-chat/client.svg?style=plastic
+[forks-url]: https://github.com/polyphony-chat/client/network/members
+[stars-shield]: https://img.shields.io/github/stars/polyphony-chat/client.svg?style=plastic
+[stars-url]: https://github.com/polyphony-chat/client/stargazers
+[issues-shield]: https://img.shields.io/github/issues/polyphony-chat/client.svg?style=plastic
+[issues-url]: https://github.com/polyphony-chat/client/issues
+[license-shield]: https://img.shields.io/github/license/polyphony-chat/client.svg?style=plastic
+[license-url]: https://github.com/polyphony-chat/client/blob/master/LICENSE
 [Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=plastic&logo=svelte&logoColor=FF3E00
 [Svelte-url]: https://svelte.dev/
 [Rust]: https://img.shields.io/badge/Rust-orange?style=plastic&logo=rust
