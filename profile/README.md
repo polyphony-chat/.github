@@ -13,7 +13,7 @@
   <p align="center">
     A multi-instance, Discord/Fosscord API-compatible chat client, written in Rust and Svelte (TypeScript) using Tauri.
     <br />
-    <a href="https://github.com/polyphony-chat/client"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/polyphony-chat/client"><strong>Explore the project »</strong></a>
     <br />
     <br />
     <a href="https://github.com/polyphony-chat/client/issues">Report Bug</a>
@@ -24,6 +24,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+
+Please, read the [clients' README for the most up-to-date information on the client project.](https://github.com/polyphony-chat/client/blob/main/README.md)
 
 ![Product Mockup](https://github.com/polyphony-chat/client/blob/main/images/mockup.png?raw=true)
 <cite>*A mockup of the Polyphony client.*</cite>
