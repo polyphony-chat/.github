@@ -41,6 +41,9 @@ The library is currently in a very early stage and is not yet ready for use.
 
 ## Polyphony
 
+[Visit the Polyphony-client repository here](https://github.com/polyphony-chat/polyphony)
+
+
 Please, read the [clients' README for the most up-to-date information on the client project.](https://github.com/polyphony-chat/polyphony/blob/main/README.md)
 
 ![Product Mockup](https://github.com/polyphony-chat/polyphony/blob/main/images/mockup.png?raw=true)
