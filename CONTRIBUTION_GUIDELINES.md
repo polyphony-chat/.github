@@ -13,3 +13,7 @@ If you want to contribute code, please follow these steps:
 - Commit your changes (git commit -m 'Add some AmazingFeature')
 - Push to the Branch (git push origin feature/AmazingFeature)
 - Open a Pull Request
+
+## Versioning
+
+All projects in this organization use [Semantic Versioning](https://semver.org/). This means that the version number is incremented as follows: `MAJOR.MINOR.PATCH`, where `MAJOR` is incremented when incompatible API changes are made, `MINOR` is incremented when new functionality is added in a backward-compatible manner, and `PATCH` is incremented when backward-compatible bug fixes are made.
