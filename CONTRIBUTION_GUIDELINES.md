@@ -1,7 +1,7 @@
 # Contribution Guidelines
 
 If you ever feel like wanting to help out with anything, please do! Any help at all is very, very much appreciated.
-Refactors, cleanups, new features, bugfixes - i'll take it all!
+Refactors, cleanups, new features, bug fixes - We'll take it all!
 
 A good place to start right now is by looking at the Chorus or Symfonia repositories and their roadmaps. 
 
