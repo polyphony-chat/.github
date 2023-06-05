@@ -46,7 +46,6 @@ and interoperable alternative.
 | [polyphony](https://github.com/polyphony-chat/polyphony)         | Modern, fast and native Desktop-Client for Discord-API-compatible services.                             |
 | [polyphony-web](https://github.com/polyphony-chat/polyphony-web) | Web-based, cross-plattform version of the Polyphony client.                                             |
 | [chorus](https://github.com/polyphony-chat/chorus)               | A rust library for interacting with multiple Discord.com-compatible APIs and Gateways at the same time. |
-| [types](https://github.com/polyphony-chat/types)                 | Common structures and types used throughout the whole project.                                          |
 | [design](https://github.com/polyphony-chat/design)               | Open source design files and assets for the project.                                                    |
 
 ## Contributing
