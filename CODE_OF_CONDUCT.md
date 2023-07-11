@@ -27,6 +27,7 @@ community include:
 
 Examples of unacceptable behavior include:
 
+- Homo-, trans- and queerphobia, ableism and racism, even when "just a joke".
 - The use of sexualized language or imagery, and unconsensual sexual attention or
   advances of any kind
 - Trolling, insulting or derogatory comments, and personal or political attacks
