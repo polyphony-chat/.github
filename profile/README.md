@@ -50,7 +50,7 @@ and interoperable alternative.
 
 ## Contributing
 
-Contributions are always welcome! Please read the [code of conduct](https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md) first. If you have any questions, feel free to join our [Discord server][Discord-invite] and ask there.
+Contributions are always welcome! Please read the [code of conduct](https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md) and the [contribution guidelines](https://github.com/polyphony-chat/.github/blob/main/CONTRIBUTION_GUIDELINES.md) first. If you have any questions, feel free to join our [Discord server][Discord-invite] and ask there.
 
 ##### This project is not affiliated with Hammer & Chisel, Discord Inc., or any related companies. You, the user of the software provided to you by this organization, are hereby advised to not use this software to infringe on the copyright of any of the aforementioned companies, and to use the software in compliance with Discords End User ToS.
 
