@@ -4,6 +4,7 @@ If you ever feel like wanting to help out with anything, please do! Any help at 
 Refactors, cleanups, new features, bug fixes - We'll take it all!
 
 A good place to start right now is by looking at the Chorus or Symfonia repositories and their roadmaps.
+If you're new to Rust or coding in general, feel free to check out the issues labeled as 'Difficulty: Simple' or 'Difficulty: Trivial'.
 
 If you want to contribute code, please follow these steps:
 
