@@ -19,6 +19,22 @@ If you want to contribute code, please follow these steps:
   - Be descriptive in the title and description of your PR.
   - The description of your PR should at least outline the work you have done.
 
+## Important Places to Contribute to
+
+If you're not fluent in Rust:
+
+- Write documentation where required and fix typos in existing documentation (Search for `DOCUMENTME` in the code).
+- Use/test our software, file issues for bugs you find, and suggest features you would like to see.
+- Web development (Polyphony Web/Tauri-repo)
+- Write unit tests for existing code, if you're feeling adventurous.
+
+If you are fluent in Rust:
+
+- Search for `TODO, FIXME, BUG, UNOPTIMIZED, REWRITEME` and `PRETTYFYME` in the codebase and fix the issues they point out.
+- Remove clippy warnings by fixing the issues they point out.
+- Check the issues labeled as 'Difficulty: Simple' or 'Difficulty: Trivial' and fix them.
+- Ask a maintainers for a task to work on.
+
 ## Versioning
 
 All projects in this organization use [Semantic Versioning](https://semver.org/). This means that the version number is incremented as follows: `MAJOR.MINOR.PATCH`, where `MAJOR` is incremented when incompatible API changes are made, `MINOR` is incremented when new functionality is added in a backward-compatible manner, and `PATCH` is incremented when backward-compatible bug fixes are made.
