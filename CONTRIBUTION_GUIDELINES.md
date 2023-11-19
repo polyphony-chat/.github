@@ -16,6 +16,7 @@ If you want to contribute code, please follow these steps:
 - Commit your changes (git commit -m 'Add some AmazingFeature')
 - Push to the Branch (git push origin feature/AmazingFeature)
 - Open a Pull Request
+  - If applicable, open the PR for the `dev` branch instead of the `main` branch.
   - Be descriptive in the title and description of your PR.
   - The description of your PR should at least outline the work you have done.
 
