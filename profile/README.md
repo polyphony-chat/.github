@@ -51,8 +51,7 @@ represent the actual state of the codebase.
 | Repository                                                       | Description                                                                                             |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | [symfonia](https://github.com/polyphony-chat/symfonia)           | API, Gateway and CDN-Server                                                                             |
-| [polyphony](https://github.com/polyphony-chat/polyphony)         | Modern, fast and native Desktop-Client for Discord-API-compatible services.                             |
-| [polyphony-web](https://github.com/polyphony-chat/polyphony-web) | Web-based, cross-plattform version of the Polyphony client.                                             |
+| [polyphony](https://github.com/polyphony-chat/polyphony)         | Web-based, modern and cross-plattform Client for Discord-API-compatible services.                       |
 | [chorus](https://github.com/polyphony-chat/chorus)               | A rust library for interacting with multiple Discord.com-compatible APIs and Gateways at the same time. |
 | [design](https://github.com/polyphony-chat/design)               | Open source design files and assets for the project.                                                    |
 
