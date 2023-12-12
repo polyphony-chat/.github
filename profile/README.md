@@ -1,6 +1,10 @@
 <div align="center">
 
 [![Discord]][Discord-invite]
+[![Status]][Status]
+[![Code-of-conduct-shield]][Code-of-conduct]
+
+
 </br>
 <a name="readme-top"></a>
 
@@ -54,5 +58,8 @@ Contributions are always welcome! Please read the [code of conduct](https://gith
 
 ##### This project is not affiliated with Hammer & Chisel, Discord Inc., or any related companies. You, the user of the software provided to you by this organization, are hereby advised to not use this software to infringe on the copyright of any of the aforementioned companies, and to use the software in compliance with Discords End User ToS.
 
-[Discord]: https://dcbadge.vercel.app/api/server/m3FpcapGDD?style=flat
+[Discord]: https://img.shields.io/badge/Discord_Server-390075
 [Discord-invite]: https://discord.com/invite/m3FpcapGDD
+[Status]: https://img.shields.io/badge/Status-Early_Development-8100ad
+[Code-of-conduct-shield]: https://img.shields.io/badge/Code_of_Conduct-eb00ff
+[Code-of-conduct]: https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md
