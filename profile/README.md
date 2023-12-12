@@ -32,15 +32,19 @@
 
 ## About
 
-Proprietary chat services suck. Polyphony aims to replicate and improve upon the experience currently
-offered by popular, proprietary chat services, while also providing a secure, private, open-source
-and interoperable alternative.
+Proprietary chat services suck. Polyphony aims to replicate the experience currently offered by 
+popular, proprietary chat services such as Discord, while improving upon this strong base, by
+offering strong security, privacy, interoperability, less unnecessary features and being free and open source - forever.
 
 - **Spacebar compatible** - Polyphony is designed to work with the [Spacebar protocol](https://github.com/spacebarchat), a Discord-API compatible chat protocol.
+- **Discord compatible** - Use Polyphony to communicate with your friends who are still using Discord.
 - **Self-hosted** - Polyphony is designed to be self-hosted, allowing you to host your chat server, similar to Matrix or TeamSpeak.
-- **Open Source** - Polyphony is open source, allowing you to audit the code and ensure that it is secure. The code is also available for you to modify and redistribute under the GPL-3.0 or AGPL-3.0 licenses.
-- **Secure** - A publicly auditable codebase, end-to-end encryption (soon), and a focus on security ensure, that your messages are secure.
-- **Lightweight, Fast and Memory-Safe** - Polyphony is written in Rust, a fast, memory-safe and modern programming language, ensuring that Polyphony inherits these properties.
+- **Open Source** - Polyphony is open source, allowing you to audit the code and ensure that it is secure. The code is also available for you to modify and redistribute under the GPL-3.0 license.
+- **Secure** - A publicly auditable codebase, end-to-end encryption, and a focus on security ensure, that your messages are secure.
+- **Lightweight, Fast and Memory-Safe** - Polyphony is written entirely in Rust, a fast, memory-safe and modern programming language, ensuring that Polyphony inherits these properties.
+
+Please note that the above table represents our core goals for the project, and as of now does not fully 
+represent the actual state of the codebase.
 
 ## Repositories
 
@@ -56,10 +60,14 @@ and interoperable alternative.
 
 Contributions are always welcome! Please read the [code of conduct](https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md) and the [contribution guidelines](https://github.com/polyphony-chat/.github/blob/main/CONTRIBUTION_GUIDELINES.md) first. If you have any questions, feel free to join our [Discord server][Discord-invite] and ask there.
 
-##### This project is not affiliated with Hammer & Chisel, Discord Inc., or any related companies. You, the user of the software provided to you by this organization, are hereby advised to not use this software to infringe on the copyright of any of the aforementioned companies, and to use the software in compliance with Discords End User ToS.
+##### This project is not affiliated with Hammer & Chisel, Discord Inc., or any related companies.
 
 [Discord]: https://img.shields.io/badge/Discord_Server-390075
 [Discord-invite]: https://discord.com/invite/m3FpcapGDD
 [Status]: https://img.shields.io/badge/Status-Early_Development-8100ad
 [Code-of-conduct-shield]: https://img.shields.io/badge/Code_of_Conduct-eb00ff
 [Code-of-conduct]: https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md
+
+---
+
+##### 🏳️‍⚧️🏳️‍🌈✊ Trans rights are human rights
