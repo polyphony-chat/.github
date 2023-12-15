@@ -20,7 +20,7 @@ The Server-Server APIs are used to enable federation between multiple Polyphony 
 
 ## 2. Federated Identity
 
-Federating user identities means that users can fully participate with users/in guilds on other servers. This means that users can send messages to users on other servers, and join guilds on other servers. Each Polyphony user, regardless of their instance, holds on to two things:
+Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. Each Polyphony user/client must hold on to two things at all times for this to work:
 1.  A federation-JWT which is signed using their home servers' private key. This token is used to authenticate with other servers, and is used to verify that the user is who they say they are.
 2.  A private-key. This key is given to the user by their home server, and is used to sign messages that the user sends to other instances.
 
