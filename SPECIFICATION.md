@@ -40,6 +40,6 @@ Bob's client could always ask Server A for the public key of Alice, but this wou
 
 ### 2.3.1. Signing keys
 
-- Signing keys should be rotated at least every 30 days. This is to ensure that a compromised key can only be used for a limited amount of time.
+- Instance/user signing keys and federation-JWTs should be rotated at least every 30 days. This is to ensure that a compromised key can only be used for a limited amount of time.
 - If Bobs client fails to verify the signature of Alice's message with the public key provided by Server B, it should ask Server A for the public key of Alice at the time the message was sent. If the verification fails again, the message should be treated with extreme caution.
 
