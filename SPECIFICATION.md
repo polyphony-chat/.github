@@ -32,30 +32,31 @@ Say that Alice is on server A, and Bob is on server B. Alice wants to send a mes
 
 Alice's client will send a message to her home server (Server A), asking it to generate an authorization token for registering on server B. Alice takes this token and sends it to server B. Server B will then ask server A if the token is valid. If all goes well, server B will send a newly generated session token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
 
-Alice's client will send a message to server B, checking if server B agrees to receive the message. This initial message contains Alice's federation-JWT, which was signed by Server A, as well as her public profile. Server B will now ask server A if Alice's federation-JWT is valid. If all goes well, server B will store Alice's public profile and send a newly generated user token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
 ```
-Alice's Client  Server A            Server B                Bob's Client
-|               |                   |                       |
-|            [Federation handshake start]                   |
-|               |                   |                       |
-|-----Federation-JWT+Profile------->|                       |
-|               |                   |                       |
-|               |<--Verification?---|                       |
-|               |                   |                       |
-|               |-----Yes, valid--->|                       |
-|               |                   |                       |
-|<----------Session Token-----------|                       |
-|               |                   |                       |
-|          [Federation handshake complete]                  |
-|               |                   |                       |
-|--Session Token+Message+Signature->|                       |
-|               |                   |                       |
-|               |                   |--Message+Signature--->|
-|               |                   |                       |
+Alice's Client              Server A            Server B            Bob's Client
+|--Register token request-->|                   |                   |
+|                           |                   |                   |
+|<-----Register token-------|                   |                   |
+|                       [Federation handshake start]                |
+|                           |                   |                   |
+|----------Register token+Profile-------------->|                   |
+|                           |                   |                   |
+|                           |<--Verification?---|                   |
+|                           |                   |                   |
+|                           |-----Yes, valid--->|                   |
+|                           |                   |                   |
+|<----------------Session Token-----------------|                   |
+|                           |                   |                   |
+|                      [Federation handshake complete]              |
+|                           |                   |                   |
+|--------Session Token+Message+Signature------->|                   |
+|                           |                   |                   |
+|                           |                   |--Signed message-->|
+|                           |                   |                   |
 ```
 Fig. 1: Sequence diagram of a successful federation handshake.
 
-We are using the federation-JWT to prove your identity, and not to directly authenticate with external servers. Doing it this way allows for different sessions to authenticate using different tokens. 
+The usage of a registration token prevents a malicious user from registering on behalf of another user.
 
 ## 2.1 Signing messages
 
