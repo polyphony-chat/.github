@@ -37,6 +37,7 @@ Alice's client will send a message to her home server (Server A), asking it to g
 
 ```
 Alice's Client              Server A            Server B            Bob's Client
+|                           |                   |                   |
 |-Federation token request->|                   |                   |
 |                           |                   |                   |
 |<-----Federation token-----|                   |                   |
@@ -60,7 +61,9 @@ Alice's Client              Server A            Server B            Bob's Client
 
 Fig. 1: Sequence diagram of a successful federation handshake.
 
-The usage of a federation token prevents a malicious user from registering on behalf of another user.
+If Alice's session token expires, or if Alice would like to sign in on another device, she can repeat this process of generating a federation token and exchanging it for a session token.
+
+The usage of a federation token prevents a malicious user from generating an external session token on behalf of another user.
 
 ## 2.1 Signing messages
 
