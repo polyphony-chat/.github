@@ -1,4 +1,5 @@
 # Polyphony Specification
+
 **v0.0.0**
 
 This document defines a set of protocols and APIs for a chat service primarily focused on communities. The document is intended to be used as a reference for developers who want to implement a client or server for the Polyphony chat service. Uses of this protocol, hereafter referred to as "the Polyphony protocol", include Instant Messaging, Voice over IP, and Video over IP, where your identity is federated between multiple servers.
@@ -10,6 +11,7 @@ The structure of this reference document is heavily inspired by the really well 
 ## 1. Polyphony APIs
 
 The specification defines a set of APIs that are used to implement the Polyphony protocol. These APIs are:
+
 - Client-Server API
 - Server-Server API
 
@@ -20,26 +22,27 @@ The Client-Server API is a RESTful API that is used by clients to communicate wi
 ### 1.2. Server-Server API
 
 The Server-Server APIs are used to enable federation between multiple Polyphony servers (federated identity).
+TODO
 
 ## 2. Federated Identity
 
-Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. Each Polyphony user/client must hold on to an ed25519 private-key. 
+Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. Each Polyphony user/client must hold on to a private-key.
 
 This key is given to the user by their home server, and is used to sign messages that the user sends to other servers.
 
 **Example:**
-Say that Alice is on server A, and Bob is on server B. Alice wants to send a message to Bob. 
+Say that Alice is on server A, and Bob is on server B. Alice wants to send a message to Bob.
 
-Alice's client will send a message to her home server (Server A), asking it to generate an authorization token for registering on server B. Alice takes this token and sends it to server B. Server B will then ask server A if the token is valid. If all goes well, server B will send a newly generated session token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
+Alice's client will send a message to her home server (Server A), asking it to generate a federation token for registering on server B. Alice takes this token and sends it to server B. Server B will then ask server A if the token is valid. If all goes well, server B will send a newly generated session token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
 
 ```
 Alice's Client              Server A            Server B            Bob's Client
-|--Register token request-->|                   |                   |
+|-Federation token request->|                   |                   |
 |                           |                   |                   |
-|<-----Register token-------|                   |                   |
+|<-----Federation token-----|                   |                   |
 |                       [Federation handshake start]                |
 |                           |                   |                   |
-|----------Register token+Profile-------------->|                   |
+|---------Federation token+Profile------------->|                   |
 |                           |                   |                   |
 |                           |<--Verification?---|                   |
 |                           |                   |                   |
@@ -49,14 +52,15 @@ Alice's Client              Server A            Server B            Bob's Client
 |                           |                   |                   |
 |                      [Federation handshake complete]              |
 |                           |                   |                   |
-|--------Session Token+Message+Signature------->|                   |
+|---------Session Token+Signed message--------->|                   |
 |                           |                   |                   |
 |                           |                   |--Signed message-->|
 |                           |                   |                   |
 ```
+
 Fig. 1: Sequence diagram of a successful federation handshake.
 
-The usage of a registration token prevents a malicious user from registering on behalf of another user.
+The usage of a federation token prevents a malicious user from registering on behalf of another user.
 
 ## 2.1 Signing messages
 
@@ -66,9 +70,9 @@ Signing messages prevents a malicious server from impersonating a user.
 
 ## 2.2 Federation-JWT and Signing Key
 
-A home server may choose to rotate a users signing key/JWT token at any time. When this happens, the home server will send a new JWT token and signing key to the user. The user's client will have to save these updated tokens, and use them when communicating with other servers. The home server has to keep track of the old JWT token and signing key, and use them to verify messages that were signed with the old key.
+A home server may choose to rotate a users signing key at any time. When this happens, the home server will send a new signing key to the user. The user's client will have to save this updated key and use it when communicating with other servers. The home server has to keep track of the old signing key, and use it to verify messages that were signed with the old key.
 
-The JWT and signing key both should be generated using the ed25519 algorithm. Both keys should be signed using the home servers' private key, so that home servers act as a certificate authority for their users' keys and JWTs.
+The JWT and signing key both should be generated using the ed25519 algorithm. Both keys should be signed using the home servers' private key, so that home servers act as a certificate authority for their users' keys.
 
 ## 2.3 Reducing network strain when verifying signatures
 
@@ -80,7 +84,7 @@ Bob's client could always ask Server A for the public key of Alice, but this wou
 
 ### 2.4.1. Signing keys
 
-- Instance/user signing keys and federation-JWTs should be rotated at least every 30 days. This is to ensure that a compromised key can only be used for a limited amount of time.
+- Instance/user signing keys should be rotated at least every 30 days. This is to ensure that a compromised key can only be used for a limited amount of time.
 - If Bobs client fails to verify the signature of Alice's message with the public key provided by Server B, it should ask Server A for the public key of Alice at the time the message was sent. If the verification fails again, the message should be treated with extreme caution.
 
 ## 3. Users
