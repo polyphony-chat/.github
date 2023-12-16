@@ -41,7 +41,7 @@ Alice's Client              Server A            Server B            Bob's Client
 |-Federation token request->|                   |                   |
 |                           |                   |                   |
 |<-----Federation token-----|                   |                   |
-|                       [Federation handshake start]                |
+|                    [Federation handshake start]                   |
 |                           |                   |                   |
 |---------Federation token+Profile------------->|                   |
 |                           |                   |                   |
@@ -51,7 +51,7 @@ Alice's Client              Server A            Server B            Bob's Client
 |                           |                   |                   |
 |<----------------Session Token-----------------|                   |
 |                           |                   |                   |
-|                      [Federation handshake complete]              |
+|                   [Federation handshake complete]                 |
 |                           |                   |                   |
 |---------Session Token+Signed message--------->|                   |
 |                           |                   |                   |
@@ -102,8 +102,26 @@ Bob's client could always ask Server A for the public key of Alice, but this wou
 
 - Employ a caching layer to handle the potentially large amount of requests for public keys without putting unnecessary strain on the database.
 
-## 3. Users
+## 3. Federating direct/group messages
+
+### 3.1 Direct messages
+
+Federating direct messages is relatively simple. When Alice sends a message to Bob, her client will send the message to her home server via an API request. Her home server will then send the message to Bob's client via an established WebSocket connection, and vice versa.
+
+### 3.2 Group messages
+
+Group messages work just like guilds. The data is stored by the home server of the group's creator, meaning that all group members will have to communicate with the group creator's home server.
+
+## 4. Users
 
 Each client must have a user associated with it. A user is identified by a unique federation ID (FID), which consists of the user's username (which must be unique on the instance) and the instance's root domain. An FID is formatted as follows: `user@domain.tld`, which makes for a globally unique user ID. Federation IDs are case-insensitive.
 
 The following regex can be used to validate user IDs: `\b([A-Z0-9._%+-]+)@([A-Z0-9.-]+\.[A-Z]{2,})\b`.
+
+## 5. Encryption
+
+The Polyphony protocol offers end-to-end encryption for messages via Message Layer Security (MLS). Polyphony protocol compliant servers take on the role of both an Authentication Service and a Delivery Service in context of MLS.
+
+Message Layer Security (MLS) is a cryptographic protocol that provides confidentiality, integrity, and authenticity guarantees for group messaging applications. MLS builds on top of the [Double Ratchet Algorithm](https://signal.org/docs/specifications/doubleratchet/) and [X3DH](https://signal.org/docs/specifications/x3dh/) to provide these security guarantees.
+
+Encryption is optional, and can be enabled on a per-channel basis. 
