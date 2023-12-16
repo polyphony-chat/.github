@@ -1,4 +1,5 @@
 # Polyphony Specification
+**v0.0.0**
 
 This document defines a set of protocols and APIs for a chat service primarily focused on communities. The document is intended to be used as a reference for developers who want to implement a client or server for the Polyphony chat service. Uses of this protocol, hereafter referred to as "the Polyphony protocol", include Instant Messaging, Voice over IP, and Video over IP, where your identity is federated between multiple servers.
 
@@ -22,32 +23,39 @@ The Server-Server APIs are used to enable federation between multiple Polyphony 
 
 ## 2. Federated Identity
 
-Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. Each Polyphony user/client must hold on to two things at all times for this to work:
-1.  A federation-JWT which is signed using their home servers' private key. This token is used to authenticate with other servers, and is used to verify that the user is who they say they are.
-2.  A private-key. This key is given to the user by their home server, and is used to sign messages that the user sends to other instances.
+Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. Each Polyphony user/client must hold on to a private-key. 
 
-Say that Alice is on server A, and Bob is on server B. Alice wants to send a message to Bob. Alice's client will send a message to server B, checking if server B agrees to receive the message. This initial message contains Alice's federation-JWT, which was signed by Server A, as well as her public profile. Server B will now ask server A if Alice's federation-JWT is valid. If all goes well, server B will store Alice's public profile and send a newly generated user token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
+This key is given to the user by their home server, and is used to sign messages that the user sends to other servers.
+
+**Example:**
+Say that Alice is on server A, and Bob is on server B. Alice wants to send a message to Bob. 
+
+Alice's client will send a message to her home server (Server A), asking it to generate an authorization token for registering on server B. Alice takes this token and sends it to server B. Server B will then ask server A if the token is valid. If all goes well, server B will send a newly generated session token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
+
+Alice's client will send a message to server B, checking if server B agrees to receive the message. This initial message contains Alice's federation-JWT, which was signed by Server A, as well as her public profile. Server B will now ask server A if Alice's federation-JWT is valid. If all goes well, server B will store Alice's public profile and send a newly generated user token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
 ```
-Alice's Client  Server A            Server B        Bob's Client
-|               |                   |               |
-|            [Federation handshake start]           |
-|               |                   |               |
-|-----Federation-JWT+Profile------->|               |
-|               |                   |               |
-|               |<--Verification?---|               |
-|               |                   |               |
-|               |-----Yes, valid--->|               |
-|               |                   |               |
-|<------------User Token------------|               |
-|               |                   |               |
-|          [Federation handshake complete]          |
-|               |                   |               |
-|---User Token Auth+ Message------->|               |
-|               |                   |               |
-|               |                   |---- Message-->|
-|               |                   |               |
+Alice's Client  Server A            Server B                Bob's Client
+|               |                   |                       |
+|            [Federation handshake start]                   |
+|               |                   |                       |
+|-----Federation-JWT+Profile------->|                       |
+|               |                   |                       |
+|               |<--Verification?---|                       |
+|               |                   |                       |
+|               |-----Yes, valid--->|                       |
+|               |                   |                       |
+|<----------Session Token-----------|                       |
+|               |                   |                       |
+|          [Federation handshake complete]                  |
+|               |                   |                       |
+|--Session Token+Message+Signature->|                       |
+|               |                   |                       |
+|               |                   |--Message+Signature--->|
+|               |                   |                       |
 ```
 Fig. 1: Sequence diagram of a successful federation handshake.
+
+We are using the federation-JWT to prove your identity, and not to directly authenticate with external servers. Doing it this way allows for different sessions to authenticate using different tokens. 
 
 ## 2.1 Signing messages
 
@@ -72,3 +80,8 @@ Bob's client could always ask Server A for the public key of Alice, but this wou
 - Instance/user signing keys and federation-JWTs should be rotated at least every 30 days. This is to ensure that a compromised key can only be used for a limited amount of time.
 - If Bobs client fails to verify the signature of Alice's message with the public key provided by Server B, it should ask Server A for the public key of Alice at the time the message was sent. If the verification fails again, the message should be treated with extreme caution.
 
+## 3. Users
+
+Each client must have a user associated with it. A user is identified by a unique federation ID (FID), which consists of the user's username (which must be unique on the instance) and the instance's root domain. An FID is formatted as follows: `user@domain.tld`, which makes for a globally unique user ID. Federation IDs are case-insensitive.
+
+The following regex can be used to validate user IDs: `\b([A-Z0-9._%+-]+)@([A-Z0-9.-]+\.[A-Z]{2,})\b`.
