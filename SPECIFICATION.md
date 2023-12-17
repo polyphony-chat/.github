@@ -16,8 +16,6 @@
   - [3. Federating direct/group messages](#3-federating-directgroup-messages)
     - [3.1 Direct messages](#31-direct-messages)
     - [3.2 Group messages](#32-group-messages)
-    - [3.3 Migrations](#33-migrations)
-      - [3.3.1 Migrating Direct Messages](#331-migrating-direct-messages)
   - [4. Users](#4-users)
   - [5. Encryption](#5-encryption)
 
@@ -131,16 +129,6 @@ Federating direct messages is relatively simple. When Alice sends a message to B
 ### 3.2 Group messages
 
 Group messages work just like guilds. The data is stored by the home server of the group's creator, meaning that all group members will have to communicate with the group creator's home server. If the group creator leaves the group, the ownership of the group is transferred to another member. The group chat stays on the group creator's home server, unless a migration is initiated by the group owner.
-
-### 3.3 Migrations
-
-Migrating is the process of moving one or more of a user's direct messages or owned group chats to another home server.
-Migrations may be initiated by a user's client, but have to be approved and executed via the involved home servers.
-
-#### 3.3.1 Migrating Direct Messages
-
-The migration of direct messages is a process in which a user alice@server-a.example.com transfers ownership of their direct messages to another account on another home server, such as alice@server-b.example.com.
-
 
 ## 4. Users
 
