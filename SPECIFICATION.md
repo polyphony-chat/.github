@@ -1,6 +1,6 @@
 # Polyphony Specification
 
-**v0.0.0**
+**v0.0.0** - Treat this as an unfinished draft.
 
 This document defines a set of protocols and APIs for a chat service primarily focused on communities. The document is intended to be used as a reference for developers who want to implement a client or server for the Polyphony chat service. Uses of this protocol, hereafter referred to as "the Polyphony protocol", include Instant Messaging, Voice over IP, and Video over IP, where your identity is federated between multiple servers.
 
@@ -125,3 +125,5 @@ The Polyphony protocol offers end-to-end encryption for messages via Message Lay
 Message Layer Security (MLS) is a cryptographic protocol that provides confidentiality, integrity, and authenticity guarantees for group messaging applications. MLS builds on top of the [Double Ratchet Algorithm](https://signal.org/docs/specifications/doubleratchet/) and [X3DH](https://signal.org/docs/specifications/x3dh/) to provide these security guarantees.
 
 Encryption is optional, and can be enabled on a per-channel basis. 
+
+TODO
