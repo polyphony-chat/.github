@@ -2,6 +2,26 @@
 
 **v0.0.0** - Treat this as an unfinished draft.
 
+- [Polyphony Specification](#polyphony-specification)
+  - [1. Polyphony APIs](#1-polyphony-apis)
+    - [1.1. Client-Server API](#11-client-server-api)
+    - [1.2. Server-Server API](#12-server-server-api)
+  - [2. Federated Identity](#2-federated-identity)
+    - [2.1 Federation tokens](#21-federation-tokens)
+    - [2.2 Signing keys and message signing](#22-signing-keys-and-message-signing)
+    - [2.3 Reducing network strain when verifying signatures](#23-reducing-network-strain-when-verifying-signatures)
+    - [2.4 Best practices](#24-best-practices)
+      - [2.4.1 Signing keys](#241-signing-keys)
+      - [2.4.2 Home server operation and design](#242-home-server-operation-and-design)
+  - [3. Federating direct/group messages](#3-federating-directgroup-messages)
+    - [3.1 Direct messages](#31-direct-messages)
+    - [3.2 Group messages](#32-group-messages)
+    - [3.3 Migrations](#33-migrations)
+      - [3.3.1 Migrating Direct Messages](#331-migrating-direct-messages)
+  - [4. Users](#4-users)
+  - [5. Encryption](#5-encryption)
+
+
 This document defines a set of protocols and APIs for a chat service primarily focused on communities. The document is intended to be used as a reference for developers who want to implement a client or server for the Polyphony chat service. Uses of this protocol, hereafter referred to as "the Polyphony protocol", include Instant Messaging, Voice over IP, and Video over IP, where your identity is federated between multiple servers.
 
 It is imperative that implementations of this protocol respect all aspects of this specification.
@@ -110,11 +130,21 @@ Federating direct messages is relatively simple. When Alice sends a message to B
 
 ### 3.2 Group messages
 
-Group messages work just like guilds. The data is stored by the home server of the group's creator, meaning that all group members will have to communicate with the group creator's home server.
+Group messages work just like guilds. The data is stored by the home server of the group's creator, meaning that all group members will have to communicate with the group creator's home server. If the group creator leaves the group, the ownership of the group is transferred to another member. The group chat stays on the group creator's home server, unless a migration is initiated by the group owner.
+
+### 3.3 Migrations
+
+Migrating is the process of moving one or more of a user's direct messages or owned group chats to another home server.
+Migrations may be initiated by a user's client, but have to be approved and executed via the involved home servers.
+
+#### 3.3.1 Migrating Direct Messages
+
+The migration of direct messages is a process in which a user alice@server-a.example.com transfers ownership of their direct messages to another account on another home server, such as alice@server-b.example.com.
+
 
 ## 4. Users
 
-Each client must have a user associated with it. A user is identified by a unique federation ID (FID), which consists of the user's username (which must be unique on the instance) and the instance's root domain. An FID is formatted as follows: `user@domain.tld`, which makes for a globally unique user ID. Federation IDs are case-insensitive.
+Each client must have a user associated with it. A user is identified by a unique federation ID (FID), which consists of the user's username (which must be unique on the instance) and the instance's root domain. A FID is formatted as follows: `user@domain.tld`, which makes for a globally unique user ID. Federation IDs are case-insensitive.
 
 The following regex can be used to validate user IDs: `\b([A-Z0-9._%+-]+)@([A-Z0-9.-]+\.[A-Z]{2,})\b`.
 
@@ -124,6 +154,5 @@ The Polyphony protocol offers end-to-end encryption for messages via Message Lay
 
 Message Layer Security (MLS) is a cryptographic protocol that provides confidentiality, integrity, and authenticity guarantees for group messaging applications. MLS builds on top of the [Double Ratchet Algorithm](https://signal.org/docs/specifications/doubleratchet/) and [X3DH](https://signal.org/docs/specifications/x3dh/) to provide these security guarantees.
 
-Encryption is optional, and can be enabled on a per-channel basis. 
-
+Clients and servers must support encryption, but whether to encrypt a message channel is up to the users.
 TODO
