@@ -18,6 +18,9 @@
     - [3.2 Group messages](#32-group-messages)
   - [4. Users](#4-users)
   - [5. Encryption](#5-encryption)
+    - [5.1 Encrypted guild channels](#51-encrypted-guild-channels)
+    - [5.2 Encrypted direct messages](#52-encrypted-direct-messages)
+    - [5.3 Encrypted group messages](#53-encrypted-group-messages)
 
 
 This document defines a set of protocols and APIs for a chat service primarily focused on communities. The document is intended to be used as a reference for developers who want to implement a client or server for the Polyphony chat service. Uses of this protocol, hereafter referred to as "the Polyphony protocol", include Instant Messaging, Voice over IP, and Video over IP, where your identity is federated between multiple servers.
@@ -143,4 +146,139 @@ The Polyphony protocol offers end-to-end encryption for messages via Message Lay
 Message Layer Security (MLS) is a cryptographic protocol that provides confidentiality, integrity, and authenticity guarantees for group messaging applications. MLS builds on top of the [Double Ratchet Algorithm](https://signal.org/docs/specifications/doubleratchet/) and [X3DH](https://signal.org/docs/specifications/x3dh/) to provide these security guarantees.
 
 Clients and servers must support encryption, but whether to encrypt a message channel is up to the users.
-TODO
+
+Note, that in the below sequence diagrams, the MLS Welcome message and the MLS Group notify message are all encrypted using the public key of the recipient. The public key in this context is not to be confused with the public signing key.
+
+### 5.1 Encrypted guild channels
+
+Encrypting a guild channel is done by a client with the `MANAGE_CHANNEL` permission. Upon successfully requesting enabling encryption of a channel, all future messages in it will be encrypted. Joining an encrypted channel is done by sending a join request to the server. The server will then notify the channels' members of the join request. The members will then decide whether to accept or reject the join request. If the join request is accepted by any member, that member will initiate the MLS welcoming process. If the member finds that the join request is invalid (perhaps due to an invalid public key), the join request must be denied.
+
+```
+     Charlie                                        Server                                            Alice                     Bob
+     |                                              |                                                 |                         |
+     | Channel join request + pubkey                |                                                 |                         |
+     |--------------------------------------------->|                                                 |                         |
+     |                                              |                                                 |                         |
+     |                                              | Notify gatekeepers of join request              |                         |
+     |                                              |-----------------------------------              |                         |
+     |                                              |                                  |              |                         |
+     |                                              |<----------------------------------              |                         |
+     |                                              |                                                 |                         |
+     |                                              | Channel join request + Charlie's pubkey         |                         |
+     |                                              |------------------------------------------------>|                         |
+     |                                              |                                                 |                         |
+     |                                              |                                                 | Verify Charlie's pubkey |
+     |                                              |                                                 |------------------------ |
+     |                                              |                                                 |                       | |
+     |                                              |                                                 |<----------------------- |
+     |                                              |                                                 |                         |
+     |                                              |             Notify group of new member: Charlie |                         |
+     |                                              |<------------------------------------------------|                         |
+     |                                              |                                                 |                         |
+     |                                              |     MLS Welcome (encrypted w/ Charlie's pubkey) |                         |
+     |                                              |<------------------------------------------------|                         |
+     |                                              |                                                 |                         |
+     |                                              | Forward: Notify group of new member: Charlie    |                         |
+     |                                              |-------------------------------------------------------------------------->|
+     |                                              |                                                 |                         |
+     | Forward: Notify group of new member: Charlie |                                                 |                         |
+     |<---------------------------------------------|                                                 |                         |
+     |                                              |                                                 |                         |
+     |               Forward: encrypted MLS Welcome |                                                 |                         |
+     |<---------------------------------------------|                                                 |                         |
+     |                                              |                                                 |                         |
+```
+Fig. 2: Sequence diagram of a successful encrypted channel join in which Alice acts as a gatekeeper. The sequence diagram assumes that Alice can verify Charlies' public key to indeed belong to Charlie, and that Alice accepts the join request.
+
+### 5.2 Encrypted direct messages
+
+Adding another person to a direct message is not possible, and would not make much sense, as the new person cannot see any messages that were sent before they joined the group. If Alice wants to add Charlie to a direct message with Bob, she will have to create a new direct message with Bob and Charlie.
+
+```
+Alice                                          Server                             Bob
+|                                              |                                  |
+| Request Bob's public key                     |                                  |
+|--------------------------------------------->|                                  |
+|                                              |                                  |
+|                             Bob's public key |                                  |
+|<---------------------------------------------|                                  |
+|                                              |                                  |
+| Verify Bob's public key                      |                                  |
+| -----------------------                      |                                  |
+|                       |                      |                                  |
+|<-----------------------                      |                                  |
+|                                              |                                  |
+| Notify group of new member: Bob              |                                  |
+|--------------------------------------------->|                                  |
+|                                              |                                  |
+| MLS Welcome (encrypted w/ Bob's pubkey)      |                                  |
+|--------------------------------------------->|                                  |
+|                                              |                                  |
+|                                              | Forward: New group member: Bob   |
+|                                              |--------------------------------->|
+|                                              |                                  |
+|                                              | Forward encrypted MLS Welcome    |
+|                                              |--------------------------------->|
+|                                              |                                  |
+```
+Fig. 3: Sequence diagram of a successful encrypted direct message creation. 
+
+
+### 5.3 Encrypted group messages
+
+Encrypted group messages work by using the traditional MLS protocol, with the additional concept of group owners. Only group owners can add new members to the group and forcibly remove others from the group. The Group owner is determined by the Client-Server API.
+
+```
+Alice (gatekeeper)                                 Server                                  Bob       Charlie
+|                                                  |                                       |         |
+| Request Bob's public key                         |                                       |         |
+|------------------------------------------------->|                                       |         |
+|                                                  |                                       |         |
+|                                 Bob's public key |                                       |         |
+|<-------------------------------------------------|                                       |         |
+|                                                  |                                       |         |
+| Verify Bob's public key                          |                                       |         |
+|------------------------                          |                                       |         |
+|                       |                          |                                       |         |
+|<-----------------------                          |                                       |         |
+|                                                  |                                       |         |
+| Notify group of new member: Bob                  |                                       |         |
+|------------------------------------------------->|                                       |         |
+|                                                  |                                       |         |
+| MLS Welcome (encrypted w/ Bob's pubkey)          |                                       |         |
+|------------------------------------------------->|                                       |         |
+|                                                  |                                       |         |
+|                                                  | Forward: New group member: Bob        |         |
+|                                                  |-------------------------------------->|         |
+|                                                  |                                       |         |
+|                                                  | Forward encrypted MLS Welcome         |         |
+|                                                  |-------------------------------------->|         |
+|                                                  |                                       |         |
+| Request Charlie's public key                     |                                       |         |
+|------------------------------------------------->|                                       |         |
+|                                                  |                                       |         |
+|                             Charlie's public key |                                       |         |
+|<-------------------------------------------------|                                       |         |
+|                                                  |                                       |         |
+| Verify Charlie's public key                      |                                       |         |
+|----------------------------                      |                                       |         |
+|                           |                      |                                       |         |
+|<---------------------------                      |                                       |         |
+|                                                  |                                       |         |
+| Notify group of new member: Charlie              |                                       |         |
+|------------------------------------------------->|                                       |         |
+|                                                  |                                       |         |
+| MLS Welcome (encrypted w/ Charlie's pubkey)      |                                       |         |
+|------------------------------------------------->|                                       |         |
+|                                                  |                                       |         |
+|                                                  | Forward: New group member: Charlie    |         |
+|                                                  |-------------------------------------->|         |
+|                                                  |                                       |         |
+|                                                  | Forward: New group member: Charlie    |         |
+|                                                  |------------------------------------------------>|
+|                                                  |                                       |         |
+|                                                  | Forward encrypted MLS Welcome         |         |
+|                                                  |------------------------------------------------>|
+|                                                  |                                       |         |
+```
+Fig. 4: Sequence diagram of a successful encrypted group creation with 3 members.
