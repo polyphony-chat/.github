@@ -106,6 +106,8 @@ The signing key should be generated using the ed25519 algorithm. Signing keys sh
 
 Signing messages prevents a malicious server from impersonating a user.
 
+TODO: Note about signing keys and how they are generated
+
 ### 2.3 Reducing network strain when verifying signatures
 
 If Bob receives a message from Alice, he will ask Server B to provide the public key of Alice at the time the message was sent. Server B will then ask Server A for this key. Server A will then send the appropriate key to Server B. Server B will then store this key in its database and forward it to Bob. Bobs' client should then ask Server A for its signing key, cache this key and verify that Server B has stored/provided the correct public key for Alice at the time the message was sent. Should Bob want to re-verify the signature of Alice's message in the future, or should another User of Server B want to verify the signature of Alice's message, Server B will already have the public key cached.
@@ -148,6 +150,8 @@ Message Layer Security (MLS) is a cryptographic protocol that provides confident
 Clients and servers must support encryption, but whether to encrypt a message channel is up to the users.
 
 Note, that in the below sequence diagrams, the MLS Welcome message and the MLS Group notify message are all encrypted using the public key of the recipient. The public key in this context is not to be confused with the public signing key.
+
+TODO: Note about encryption keys and how they are generated
 
 ### 5.1 Encrypted guild channels
 
