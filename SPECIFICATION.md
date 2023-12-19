@@ -22,8 +22,11 @@
     - [5.1 Encrypted guild channels](#51-encrypted-guild-channels)
     - [5.2 Encrypted direct messages](#52-encrypted-direct-messages)
     - [5.3 Encrypted group messages](#53-encrypted-group-messages)
+    - [5.4 Multi-device support](#54-multi-device-support)
+    - [5.5 Best practices](#55-best-practices)
   - [6. Keys and signatures](#6-keys-and-signatures)
     - [6.1. KeyPackages](#61-keypackages)
+      - [6.1.1 Last resort KeyPackages](#611-last-resort-keypackages)
     - [6.2. User identity](#62-user-identity)
 
 
@@ -46,7 +49,8 @@ The Client-Server API is a RESTful API that is used by clients to communicate wi
 
 #### 1.1.1. Initial authentication
 
-During the initial authentication (registration) process, a client must provide at least one `KeyPackage`, in addition to the required registration information.
+TODO add section
+During the initial authentication (registration) process, a client must provide at least one `KeyPackage`, as well as one "last resort" `KeyPackage` (see ...) in addition to the required registration information.
 
 The identity key inside the `LeafNode` of this `KeyPackage` is signed using the home servers' private key, so that home servers act as a certificate authority for their users' keys.
 
@@ -168,42 +172,42 @@ TODO: Write about multi-device support and using X3DH to securely sync message h
 
 ### 5.1 Encrypted guild channels
 
-Encrypting a guild channel is done by a client with the `MANAGE_CHANNEL` permission. Upon successfully requesting enabling encryption of a channel, all future messages in it will be encrypted. Joining an encrypted channel is done by sending a join request to the server. The server will then notify the channels' members of the join request. The members will then decide whether to accept or reject the join request. If the join request is accepted by any member, that member will initiate the MLS welcoming process. If the member finds that the join request is invalid (perhaps due to an invalid public key), the join request must be denied.
+Encrypting a guild channel is done by a client with the `MANAGE_CHANNEL` permission. Upon successfully requesting enabling encryption of a channel, all future messages in it will be encrypted. Joining an encrypted channel is done by sending a join request to the server. The server will then notify the channels' members of the join request. The members will then decide whether to accept or reject the join request. If the join request is accepted by any member, that member will initiate the MLS welcoming process. If the member finds that the join request is invalid (perhaps due to an invalid `KeyPackage`), the join request must be denied. It is imperative that join requests are verified correctly by the server.
 
 ```
-     Charlie                                        Server                                            Alice                     Bob
-     |                                              |                                                 |                         |
-     | Channel join request + pubkey                |                                                 |                         |
-     |--------------------------------------------->|                                                 |                         |
-     |                                              |                                                 |                         |
-     |                                              | Notify gatekeepers of join request              |                         |
-     |                                              |-----------------------------------              |                         |
-     |                                              |                                  |              |                         |
-     |                                              |<----------------------------------              |                         |
-     |                                              |                                                 |                         |
-     |                                              | Channel join request + Charlie's pubkey         |                         |
-     |                                              |------------------------------------------------>|                         |
-     |                                              |                                                 |                         |
-     |                                              |                                                 | Verify Charlie's pubkey |
-     |                                              |                                                 |------------------------ |
-     |                                              |                                                 |                       | |
-     |                                              |                                                 |<----------------------- |
-     |                                              |                                                 |                         |
-     |                                              |             Notify group of new member: Charlie |                         |
-     |                                              |<------------------------------------------------|                         |
-     |                                              |                                                 |                         |
-     |                                              |     MLS Welcome (encrypted w/ Charlie's pubkey) |                         |
-     |                                              |<------------------------------------------------|                         |
-     |                                              |                                                 |                         |
-     |                                              | Forward: Notify group of new member: Charlie    |                         |
-     |                                              |-------------------------------------------------------------------------->|
-     |                                              |                                                 |                         |
-     | Forward: Notify group of new member: Charlie |                                                 |                         |
-     |<---------------------------------------------|                                                 |                         |
-     |                                              |                                                 |                         |
-     |               Forward: encrypted MLS Welcome |                                                 |                         |
-     |<---------------------------------------------|                                                 |                         |
-     |                                              |                                                 |                         |
+     Charlie                                        Server                                            Alice                         Bob
+     |                                              |                                                 |                             |
+     | Channel join request + KeyPackage            |                                                 |                             |
+     |--------------------------------------------->|                                                 |                             |
+     |                                              |                                                 |                             |
+     |                                              | Notify gatekeepers of join request              |                             |
+     |                                              |-----------------------------------              |                             |
+     |                                              |                                  |              |                             |
+     |                                              |<----------------------------------              |                             |
+     |                                              |                                                 |                             |
+     |                                              | Channel join request + Charlie's KeyPackage     |                             |
+     |                                              |------------------------------------------------>|                             |
+     |                                              |                                                 |                             |
+     |                                              |                                                 | Verify Charlie's KeyPackage |
+     |                                              |                                                 |------------------------     |
+     |                                              |                                                 |                       |     |
+     |                                              |                                                 |<-----------------------     |
+     |                                              |                                                 |                             |
+     |                                              |             Notify group of new member: Charlie |                             |
+     |                                              |<------------------------------------------------|                             |
+     |                                              |                                                 |                             |
+     |                                              |                           Encrypted MLS Welcome |                             |
+     |                                              |<------------------------------------------------|                             |
+     |                                              |                                                 |                             |
+     |                                              | Forward: Notify group of new member: Charlie    |                             |
+     |                                              |------------------------------------------------------------------------------>|
+     |                                              |                                                 |                             |
+     | Forward: Notify group of new member: Charlie |                                                 |                             |
+     |<---------------------------------------------|                                                 |                             |
+     |                                              |                                                 |                             |
+     |               Forward: encrypted MLS Welcome |                                                 |                             |
+     |<---------------------------------------------|                                                 |                             |
+     |                                              |                                                 |                             |
 ```
 Fig. 2: Sequence diagram of a successful encrypted channel join in which Alice acts as a gatekeeper. The sequence diagram assumes that Alice can verify Charlies' public key to indeed belong to Charlie, and that Alice accepts the join request.
 
@@ -214,13 +218,13 @@ Adding another person to a direct message is not possible, and would not make mu
 ```
 Alice                                          Server                             Bob
 |                                              |                                  |
-| Request Bob's public key                     |                                  |
+| Request Bob's KeyPackages                    |                                  |
 |--------------------------------------------->|                                  |
 |                                              |                                  |
-|                             Bob's public key |                                  |
+|                            Bob's KeyPackages |                                  |
 |<---------------------------------------------|                                  |
 |                                              |                                  |
-| Verify Bob's public key                      |                                  |
+| Verify Bob's KeyPackages                     |                                  |
 | -----------------------                      |                                  |
 |                       |                      |                                  |
 |<-----------------------                      |                                  |
@@ -228,7 +232,7 @@ Alice                                          Server                           
 | Notify group of new member: Bob              |                                  |
 |--------------------------------------------->|                                  |
 |                                              |                                  |
-| MLS Welcome (encrypted w/ Bob's pubkey)      |                                  |
+| Encrypted MLS Welcome                        |                                  |
 |--------------------------------------------->|                                  |
 |                                              |                                  |
 |                                              | Forward: New group member: Bob   |
@@ -248,13 +252,13 @@ Encrypted group messages work by using the traditional MLS protocol, with the ad
 ```
 Alice (gatekeeper)                                 Server                                  Bob       Charlie
 |                                                  |                                       |         |
-| Request Bob's public key                         |                                       |         |
+| Request Bob's KeyPackages                        |                                       |         |
 |------------------------------------------------->|                                       |         |
 |                                                  |                                       |         |
-|                                 Bob's public key |                                       |         |
+|                                Bob's KeyPackages |                                       |         |
 |<-------------------------------------------------|                                       |         |
 |                                                  |                                       |         |
-| Verify Bob's public key                          |                                       |         |
+| Verify Bob's KeyPackages                         |                                       |         |
 |------------------------                          |                                       |         |
 |                       |                          |                                       |         |
 |<-----------------------                          |                                       |         |
@@ -262,7 +266,7 @@ Alice (gatekeeper)                                 Server                       
 | Notify group of new member: Bob                  |                                       |         |
 |------------------------------------------------->|                                       |         |
 |                                                  |                                       |         |
-| MLS Welcome (encrypted w/ Bob's pubkey)          |                                       |         |
+| Encrypted MLS Welcome                            |                                       |         |
 |------------------------------------------------->|                                       |         |
 |                                                  |                                       |         |
 |                                                  | Forward: New group member: Bob        |         |
@@ -271,13 +275,13 @@ Alice (gatekeeper)                                 Server                       
 |                                                  | Forward encrypted MLS Welcome         |         |
 |                                                  |-------------------------------------->|         |
 |                                                  |                                       |         |
-| Request Charlie's public key                     |                                       |         |
+| Request Charlie's KeyPackages                    |                                       |         |
 |------------------------------------------------->|                                       |         |
 |                                                  |                                       |         |
-|                             Charlie's public key |                                       |         |
+|                            Charlie's KeyPackages |                                       |         |
 |<-------------------------------------------------|                                       |         |
 |                                                  |                                       |         |
-| Verify Charlie's public key                      |                                       |         |
+| Verify Charlie's KeyPackages                     |                                       |         |
 |----------------------------                      |                                       |         |
 |                           |                      |                                       |         |
 |<---------------------------                      |                                       |         |
@@ -285,7 +289,7 @@ Alice (gatekeeper)                                 Server                       
 | Notify group of new member: Charlie              |                                       |         |
 |------------------------------------------------->|                                       |         |
 |                                                  |                                       |         |
-| MLS Welcome (encrypted w/ Charlie's pubkey)      |                                       |         |
+| Encrypted MLS Welcome                            |                                       |         |
 |------------------------------------------------->|                                       |         |
 |                                                  |                                       |         |
 |                                                  | Forward: New group member: Charlie    |         |
@@ -300,9 +304,24 @@ Alice (gatekeeper)                                 Server                       
 ```
 Fig. 4: Sequence diagram of a successful encrypted group creation with 3 members.
 
+### 5.4 Multi-device support
+
+Polyphony servers and clients must implement multi-device support, as defined in the MLS specification (RFC9420).
+In addition to the MLS specification, Polyphony servers and clients must also implement the X3DH key agreement protocol to securely sync message history. Clients must not use the same keys on multiple devices. Instead, the MLS protocol considers each login on a new device a new client.
+
+TODO: Can two clients safely negotiate keys with each other when the server is hijacked? If not, scrap message history sync.
+
+Regardless of channel or group permissions, a user join request from a new device should be accepted by default.
+
+### 5.5 Best practices
+
+- In case of encrypted guild channel join requests, it may be a good idea to treat multiple join requests from the same user with different clients as a single join request.
+- Joining an encrypted channel, even from an already established member with a new device, should be an event clearly visible to all members of the channel. This is to prevent a malicious user from joining a channel without the other members noticing.
+
 ## 6. Keys and signatures
 
 All keys must be generated using the `EdDSA` signature scheme.
+TODO: Specifics?
 
 ### 6.1. KeyPackages
 
@@ -331,7 +350,13 @@ A `KeyPackage` is supposed to be used only once. Servers must ensure the followi
 
 Because `KeyPackages` are supposed to be used only once, it is recommended that servers store multiple valid `KeyPackages` for each user. A server must notify a client when it is running low on `KeyPackages` for a user. Consult the Client-Server-API for more information on how servers should request new `KeyPackages` from clients. Servers should delete a `KeyPackage` when it is no longer valid.
 
+#### 6.1.1 Last resort KeyPackages
+
+A "last resort" `KeyPackage` is a `KeyPackage` which can be used multiple times. Such `KeyPackages` are only to be given out to clients when a server has no more valid, regular `KeyPackages` available for a user. This is to prevent DoS attacks, where a malicious client could request a large amount of `KeyPackages` for a user, causing other users not being able to adding the attacked user to an encrypted group or guild channel.
+
+Once a server has given out a "last resort" `KeyPackage` to a client, the server should request a new "last resort" `KeyPackage` from the client from the user, once they connect to the server again. The old "last resort" `KeyPackage` should then be deleted.
+
 ### 6.2. User identity
 
-Even though section 6.1 defines that a `KeyPackage` should be deleted by the server after it has been given out once, servers must keep track of the identity keys of all users that are registered on the server, and must be able to provide the public key of a user and a given point in time to other servers, when requested. This is to ensure messages sent by users, even ones sent a long time ago, can be verified by other servers. This is because the public key of a user may change over time and users must sign all messages they send to other servers.
+Even though section 6.1 defines that a `KeyPackage` should be deleted by the server after it has been given out once, servers must keep track of the identity keys of all users that are registered on the server, and must be able to provide a users' identity key (or keys, in the case of multi-device users) for a given timestamp, when requested. This is to ensure messages sent by users, even ones sent a long time ago, can be verified by other servers and their users. This is because the public key of a user may change over time and users must sign all messages they send to other servers.
 
