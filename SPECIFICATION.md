@@ -49,8 +49,7 @@ The Client-Server API is a RESTful API that is used by clients to communicate wi
 
 #### 1.1.1. Initial authentication
 
-TODO add section
-During the initial authentication (registration) process, a client must provide at least one `KeyPackage`, as well as one "last resort" `KeyPackage` (see ...) in addition to the required registration information.
+During the initial authentication (registration) process, a client must provide at least one `KeyPackage`, as well as one "last resort" `KeyPackage` (see [6.1.1 Last resort KeyPackages](#611-last-resort-keypackages)) in addition to the required registration information.
 
 The identity key inside the `LeafNode` of this `KeyPackage` is signed using the home servers' private key, so that home servers act as a certificate authority for their users' keys.
 
