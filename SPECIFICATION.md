@@ -5,6 +5,7 @@
 - [Polyphony Specification](#polyphony-specification)
   - [1. Polyphony APIs](#1-polyphony-apis)
     - [1.1. Client-Server API](#11-client-server-api)
+      - [1.1.1. Initial authentication](#111-initial-authentication)
     - [1.2. Server-Server API](#12-server-server-api)
   - [2. Federated Identity](#2-federated-identity)
     - [2.1 Federation tokens](#21-federation-tokens)
@@ -21,11 +22,14 @@
     - [5.1 Encrypted guild channels](#51-encrypted-guild-channels)
     - [5.2 Encrypted direct messages](#52-encrypted-direct-messages)
     - [5.3 Encrypted group messages](#53-encrypted-group-messages)
+  - [6. Keys and signatures](#6-keys-and-signatures)
+    - [6.1. KeyPackages](#61-keypackages)
+    - [6.2. User identity](#62-user-identity)
 
 
 This document defines a set of protocols and APIs for a chat service primarily focused on communities. The document is intended to be used as a reference for developers who want to implement a client or server for the Polyphony chat service. Uses of this protocol, hereafter referred to as "the Polyphony protocol", include Instant Messaging, Voice over IP, and Video over IP, where your identity is federated between multiple servers.
 
-It is imperative that implementations of this protocol respect all aspects of this specification.
+The information provided to you via this document only fully covers the Polyphony Protocol itself. To correctly implement the Polyphony protocol, you must read the MLS specification (RFC9420). It is imperative that implementations of this protocol respect all aspects of this specification. 
 
 The structure of this reference document is heavily inspired by the really well written [Matrix specification](https://spec.matrix.org/latest).
 
@@ -40,6 +44,14 @@ The specification defines a set of APIs that are used to implement the Polyphony
 
 The Client-Server API is a RESTful API that is used by clients to communicate with the server. It is a modification of the Discord v9 API and is completely backwards compatible with it, even if not all endpoints are supported. An example of an unsupported endpoint would be the "Super-reactions" endpoint, which are treated as regular reactions by Polyphony.
 
+#### 1.1.1. Initial authentication
+
+During the initial authentication (registration) process, a client must provide at least one `KeyPackage`, in addition to the required registration information.
+
+The identity key inside the `LeafNode` of this `KeyPackage` is signed using the home servers' private key, so that home servers act as a certificate authority for their users' keys.
+
+See [6.1. KeyPackages](#61-keypackages) for an outline on what a `KeyPackage` is, and consult the MLS specification (RFC9420) for more implementation details.
+
 ### 1.2. Server-Server API
 
 The Server-Server APIs are used to enable federation between multiple Polyphony servers (federated identity).
@@ -47,14 +59,14 @@ TODO
 
 ## 2. Federated Identity
 
-Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. Each Polyphony user/client must hold on to a private-key.
+Federating user identities means that users can fully participate on other instances. This means that users can, for example, DM users from another server or join external Guilds. 
 
-This key is given to the user by their home server, and is used to sign messages that the user sends to other servers.
+The identity key defined in [6.1. KeyPackages](#61-keypackages) is used to sign messages that the user sends to other servers.
 
 **Example:**
 Say that Alice is on server A, and Bob is on server B. Alice wants to send a message to Bob.
 
-Alice's client will send a message to her home server (Server A), asking it to generate a federation token for registering on server B. Alice takes this token and sends it to server B. Server B will then ask server A if the token is valid. If all goes well, server B will send a newly generated session token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
+Alice's client will send a message to her home server (Server A), asking it to generate a one-time use federation token for registering on server B. Alice takes this token and sends it to server B. Server B will then ask server A if the token is valid. If all goes well, server B will send a newly generated session token back to Alice's client. Alice's client can then authenticate with server B using this token, and send the message to server B. Server B will then send the message to Bob's client.
 
 ```
 Alice's Client              Server A            Server B            Bob's Client
@@ -80,6 +92,8 @@ Alice's Client              Server A            Server B            Bob's Client
 |                           |                   |                   |
 ```
 
+TODO: Server B does not have to ask Server A if the token is valid, no? :thinking:
+ 
 Fig. 1: Sequence diagram of a successful federation handshake.
 
 If Alice's session token expires, or if Alice would like to sign in on another device, she can repeat this process of generating a federation token and exchanging it for a session token.
@@ -96,13 +110,12 @@ Federation tokens are generated by the user's home server. The token is a JSON o
 - The domain of the user's home server.
 - A securely-randomly generated nonce
 
+
 ### 2.2 Signing keys and message signing
 
 As mentioned in the previous section, users must hold on to a private key at all times. This key is used to sign all messages that the user sends to other instances. The key is generated by the user's home server, and is sent to the user's client when the user first registers on the server. The key is stored in the client's local storage. The signing key must not be used for encryption purposes.
 
-A home server may choose to rotate a users signing key at any time. When this happens, the home server will send a new signing key to the user. The user's client will have to save this updated key and use it when communicating with other servers. The home server has to keep track of the old signing key, and use it to verify messages that were signed with the old key.
-
-The signing key should be generated using the ed25519 algorithm. Signing keys should be signed using the home servers' private key, so that home servers act as a certificate authority for their users' keys.
+A client may choose to rotate their signing key at any time. When this happens, the home server will send a new signing key to the user. The user's client will have to save this updated key and use it when communicating with other servers. The home server has to keep track of the old signing key, and use it to verify messages that were signed with the old key.
 
 Signing messages prevents a malicious server from impersonating a user.
 
@@ -110,9 +123,9 @@ TODO: Note about signing keys and how they are generated
 
 ### 2.3 Reducing network strain when verifying signatures
 
-If Bob receives a message from Alice, he will ask Server B to provide the public key of Alice at the time the message was sent. Server B will then ask Server A for this key. Server A will then send the appropriate key to Server B. Server B will then store this key in its database and forward it to Bob. Bobs' client should then ask Server A for its signing key, cache this key and verify that Server B has stored/provided the correct public key for Alice at the time the message was sent. Should Bob want to re-verify the signature of Alice's message in the future, or should another User of Server B want to verify the signature of Alice's message, Server B will already have the public key cached.
+If Bob receives a message from Alice, he will ask Server B to provide the public identity key of Alice at the time the message was sent. Server B will then ask Server A for this key. Server A will then send the appropriate key to Server B. Server B will then store this key in its database and forward it to Bob. Bobs' client should then ask Server A for its signing key, cache this key and verify that Server B has stored/provided the correct public identity key for Alice at the time the message was sent. Should Bob want to re-verify the signature of Alice's message in the future, or should another User of Server B want to verify the signature of Alice's message, Server B will already have the public identity key cached.
 
-Bob's client could always ask Server A for the public key of Alice, but this would put unnecessary strain on the network. This is why Server B should cache the public keys of users from other instances.
+Bob's client could always ask Server A for the public identity key of Alice, but this would put unnecessary strain on the network. This is why Server B should cache the public identity keys of users from other instances.
 
 ### 2.4 Best practices
 
@@ -151,7 +164,7 @@ Clients and servers must support encryption, but whether to encrypt a message ch
 
 Note, that in the below sequence diagrams, the MLS Welcome message and the MLS Group notify message are all encrypted using the public key of the recipient. The public key in this context is not to be confused with the public signing key.
 
-TODO: Note about encryption keys and how they are generated
+TODO: Write about multi-device support and using X3DH to securely sync message history between devices.
 
 ### 5.1 Encrypted guild channels
 
@@ -286,3 +299,39 @@ Alice (gatekeeper)                                 Server                       
 |                                                  |                                       |         |
 ```
 Fig. 4: Sequence diagram of a successful encrypted group creation with 3 members.
+
+## 6. Keys and signatures
+
+All keys must be generated using the `EdDSA` signature scheme.
+
+### 6.1. KeyPackages
+
+A Polyphony server must store KeyPackages for all users that are registered on the server. The `KeyPackage` is a JSON object that contains the following information:
+
+```json
+{
+  "protocol_version": "<Version>",
+  "cipher_suite": "<CipherSuite>",
+  "init_key": "<HPKEPublicKey>",
+  "leaf_node": "<LeafNode>",
+  "extensions": "<Extensions>",
+}
+```
+
+- `protocol_version` is the version of the MLS protocol the `KeyPackage` is using.
+- `cipher_suite` is the cipher suite that this KeyPackage is using. Note that a client may store multiple KeyPackages for a single user, to support multiple cipher suites.
+- `init_key` is a public key that is used to encrypt the group's initial secrets.
+- `leaf_node` is a signed `LeafNodeTBS` struct as defined in section `7.2. Leaf Node Contents` in RFC9420. Generally, a `LeafNode` contains information to verify a user's identity. The `LeafNodeTBS` is signed using the user's private signing key.
+- `extensions` can be used to add additional information to the protocol, as defined in section `13. Extensibility` in RFC9420.
+
+A `KeyPackage` is supposed to be used only once. Servers must ensure the following things:
+-  That any `KeyPackage` is not given out to clients more than once.
+-  That the `init_key` values of all `KeyPackages` are unique, as the `init_key` is what makes the `KeyPackage` one-time use.
+-  That the contents of the `LeafNode` as well as the `init_key` were signed by the user who submitted the `KeyPackage`.
+
+Because `KeyPackages` are supposed to be used only once, it is recommended that servers store multiple valid `KeyPackages` for each user. A server must notify a client when it is running low on `KeyPackages` for a user. Consult the Client-Server-API for more information on how servers should request new `KeyPackages` from clients. Servers should delete a `KeyPackage` when it is no longer valid.
+
+### 6.2. User identity
+
+Even though section 6.1 defines that a `KeyPackage` should be deleted by the server after it has been given out once, servers must keep track of the identity keys of all users that are registered on the server, and must be able to provide the public key of a user and a given point in time to other servers, when requested. This is to ensure messages sent by users, even ones sent a long time ago, can be verified by other servers. This is because the public key of a user may change over time and users must sign all messages they send to other servers.
+
