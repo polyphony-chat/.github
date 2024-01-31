@@ -33,12 +33,12 @@
 ## About
 
 Proprietary chat services suck. Polyphony aims to replicate the experience currently offered by 
-popular, proprietary chat services such as Discord, while improving upon this strong base, by
+popular, proprietary chat services such as Discord through improving upon this strong base, by
 offering strong security, privacy, interoperability, less unnecessary features and being free and open source - forever.
 
 - **Spacebar compatible** - Polyphony is designed to work with [Spacebar](https://github.com/spacebarchat), a Discord-API compatible chat protocol.
 - **Self-hosted** - Polyphony is designed to be self-hosted, allowing you to host your chat server, similar to Matrix or TeamSpeak.
-- **Open Source** - Polyphony is open source, allowing you to audit the code and ensure that it is secure. The code is also available for you to modify and redistribute under the GPL-3.0 license.
+- **Open Source** - Polyphony is open source, allowing you to audit the code and ensure that it is secure. The code is also available for you to modify and redistribute through licenses such as the MPL-2.0.
 - **Secure** - A publicly auditable codebase, end-to-end encryption, and a focus on security ensure, that your messages are secure.
 - **Lightweight, Fast and Memory-Safe** - Polyphony is written entirely in Rust, a fast, memory-safe and modern programming language, ensuring that Polyphony inherits these properties.
 
