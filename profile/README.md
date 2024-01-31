@@ -32,11 +32,9 @@
 
 ## About
 
-Proprietary chat services suck. Polyphony aims to replicate the experience currently offered by 
-popular, proprietary chat services such as Discord through improving upon this strong base, by
-offering strong security, privacy, interoperability, less unnecessary features and being free and open source - forever.
+Proprietary chat services suck. The Polyphony project aims to create easy to use, federated and secure communications software and protocols. 
 
-- **Spacebar compatible** - Polyphony is designed to work with [Spacebar](https://github.com/spacebarchat), a Discord-API compatible chat protocol.
+- **Spacebar compatible** - Polyphony is designed to be compatible with [Spacebar](https://github.com/spacebarchat), an open-source, Discord-API compatible chat service.
 - **Self-hosted** - Polyphony is designed to be self-hosted, allowing you to host your chat server, similar to Matrix or TeamSpeak.
 - **Open Source** - Polyphony is open source, allowing you to audit the code and ensure that it is secure. The code is also available for you to modify and redistribute through licenses such as the MPL-2.0.
 - **Secure** - A publicly auditable codebase, end-to-end encryption, and a focus on security ensure, that your messages are secure.
@@ -47,12 +45,14 @@ represent the actual state of the codebase.
 
 ## Repositories
 
+We are currently working on the following things:
+
 | Repository                                               | Description                                                                                             |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | [polyproto](https://github.com/polyphony-chat/polyproto) | A modern, simple and secure identity federation and trusted message exchange protocol.                  |
 | [symfonia](https://github.com/polyphony-chat/symfonia)   | API, Gateway and CDN-Server                                                                             |
-| [polyphony](https://github.com/polyphony-chat/polyphony) | Web-based, modern and cross-plattform Client for Discord-API-compatible services.                       |
-| [chorus](https://github.com/polyphony-chat/chorus)       | A rust library for interacting with multiple Discord.com-compatible APIs and Gateways at the same time. |
+| [polyphony](https://github.com/polyphony-chat/polyphony) | Web-based, modern and cross-plattform Client for Polyphony, implementing polyproto and compatible with Discord-API compatible services, such as Spacebar.                      |
+| [chorus](https://github.com/polyphony-chat/chorus)       | A rust library for interacting with the polyproto-chat network and partially polyproto-chat compatible services, such as Spacebar and Discord  |
 | [design](https://github.com/polyphony-chat/design)       | Open source design files and assets for the project.                                                    |
 
 ## Contributing
