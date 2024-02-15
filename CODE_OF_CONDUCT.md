@@ -1,4 +1,6 @@
-# Contributor Covenant Code of Conduct
+# Contributor Code of Conduct
+
+This code of conduct document is based on the Contributor Covenant Code of Conduct 
 
 ## Our Pledge
 
@@ -27,7 +29,7 @@ community include:
 
 Examples of unacceptable behavior include:
 
-- Homo-, trans- and queerphobia, ableism and racism, even when "just a joke". 🏳️‍⚧️🏳️‍🌈✊
+- Homo-, trans- and queerphobia, ableism and racism, even when "just a joke".
 - The use of sexualized language or imagery, and unconsensual sexual attention or
   advances of any kind
 - Trolling, insulting or derogatory comments, and personal or political attacks
