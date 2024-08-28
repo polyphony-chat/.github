@@ -1,6 +1,6 @@
 # Contributor Code of Conduct
 
-This code of conduct document is based on the Contributor Covenant Code of Conduct 
+This code of conduct document is based on the Contributor Covenant Code of Conduct.
 
 ## Our Pledge
 
@@ -30,7 +30,7 @@ community include:
 Examples of unacceptable behavior include:
 
 - Homo-, trans- and queerphobia, ableism and racism, even when "just a joke".
-- The use of sexualized language or imagery, and unconsensual sexual attention or
+- The use of sexualized language or imagery, and sexual attention or
   advances of any kind
 - Trolling, insulting or derogatory comments, and personal or political attacks
 - Public or private harassment
@@ -38,6 +38,19 @@ Examples of unacceptable behavior include:
   address, without their explicit permission
 - Other conduct which could reasonably be considered inappropriate in a
   professional setting. Goofing around is fine, but don't push your luck.
+
+### Our stance on using AI to generate images, video or music
+
+We disapprove of the usage of AI image and video generation within our community.
+This practice undermines artistic professions by devaluing human creativity, skill, and
+craftsmanship, which is already leading to job displacement within creative fields.
+
+The training data used for these models is often obtained without the consent of artists, denying
+them their right of control over their work and any sort of financial compensation. This is
+simply unethical.
+
+As such, we do not condone the use or spreading of AI generated images, videos, or music in our work
+and our community.
 
 ## Enforcement Responsibilities
 
@@ -49,7 +62,7 @@ or harmful.
 Community leaders have the right and responsibility to remove, edit, or reject
 comments, commits, code, wiki edits, issues, and other contributions and content
 that is not aligned to this Code of Conduct, and will communicate reasons for
-moderation decisions when appropriate.
+moderation decisions when they deem appropriate.
 
 ## Scope
 
@@ -63,7 +76,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-https://discord.com/invite/m3FpcapGDD or lignite-due-00@icloud.com.
+<https://discord.com/invite/m3FpcapGDD> or [info@polyphony.chat](mailto:info@polyphony.chat).
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
@@ -126,7 +139,7 @@ enforcement ladder](https://github.com/mozilla/diversity).
 
 [homepage]: https://www.contributor-covenant.org
 
-For answers to common questions about this code of conduct, see the FAQ at
+For answers to common questions about this code of conduct, you may refer to the FAQ at
 https://www.contributor-covenant.org/faq. Translations are available at
 https://www.contributor-covenant.org/translations.
 
