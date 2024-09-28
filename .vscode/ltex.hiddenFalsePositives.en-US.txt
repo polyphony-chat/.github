@@ -1,0 +1,2 @@
+{"rule":"GENERAL_XX","sentence":"^\\QOur software should benefit the general public, not corporations.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QBe open, stay open: Through the MPL-2.0 license, we ensure that our software can be used by anyone, for any(-ish) purpose.\\E$"}
