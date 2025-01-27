@@ -42,7 +42,7 @@ Proprietary chat services suck. The Polyphony project aims to create easy to use
   *polyproto-chat* is a new chat protocol built on top of polyproto, which can be implemented and
   extended upon by anyone.
 - **Create modern, reliable and easy to use chat software**: With
-  [Polyphony](https://github.com/polyphony-chat/polyphony),
+  [client](https://github.com/polyphony-chat/client),
   [chorus](https://github.com/polyphony-chat/chorus) and
   [symfonia](https://github.com/polyphony-chat/symfonia), we are developing an alternative to
   proprietary chat services. We are compatible with [Spacebar Chat](https://spacebar.chat), an
@@ -57,13 +57,13 @@ Proprietary chat services suck. The Polyphony project aims to create easy to use
 
 We are currently working on the following things:
 
-| Repository                                                  | Description                                                                                                                              |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [polyproto](https://github.com/polyphony-chat/polyproto-rs) | A modern, simple and secure identity federation and trusted message exchange protocol. Rust implementation.                              |
-| [symfonia](https://github.com/polyphony-chat/symfonia)      | Our API, CDN and gateway server.                                                                                                         |
-| [polyphony](https://github.com/polyphony-chat/polyphony)    | Modern and cross platform Client for Polyphony.                                                                                          |
-| [chorus](https://github.com/polyphony-chat/chorus)          | A Rust library for interacting with Polyphony, the polyproto-chat network and Spacebar-compatible services, such as Spacebar and Discord |
-| [design](https://github.com/polyphony-chat/design)          | Open source design files and assets for the project.                                                                                     |
+| Repository                                                  | Description                                                                                                                                                  |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [polyproto](https://github.com/polyphony-chat/polyproto-rs) | A modern, simple and secure identity federation and trusted message exchange protocol. Rust implementation.                                                  |
+| [symfonia](https://github.com/polyphony-chat/symfonia)      | Our API, CDN and gateway server.                                                                                                                             |
+| [client](https://github.com/polyphony-chat/client)          | Modern and cross plattform Client for Polyphony. Currently not being worked on, as we focus on developing a solid client library, server and protocol first. |
+| [chorus](https://github.com/polyphony-chat/chorus)          | A Rust library for interacting with Polyphony, the polyproto-chat network and Spacebar-compatible services, such as Spacebar and Discord                     |
+| [design](https://github.com/polyphony-chat/design)          | Open source design files and assets for the project.                                                                                                         |
 
 ## Contributing
 
