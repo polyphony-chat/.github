@@ -67,7 +67,32 @@ We are currently working on the following things:
 
 ## Contributing
 
-Contributions are always welcome! Please read the [code of conduct](https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md) and the [contribution guidelines](https://github.com/polyphony-chat/.github/blob/main/CONTRIBUTION_GUIDELINES.md) first. If you have any questions, feel free to join our [Discord server][Discord-invite] and ask there.
+Contributions are always welcome! Please read the [code of conduct](https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md) and the [contribution guidelines](https://github.com/polyphony-chat/.github/blob/main/CONTRIBUTION_GUIDELINES.md) first. If you have any questions or would like to stay up to date on development progress, feel free to check out the below "Communications" section.
+
+## Communications
+
+### Discord
+
+Ironically, Discord is our primary community hub. You can join via the invite link: [Discord-invite]
+
+### IRC
+
+All discord channels that have seen usage in the past 6 months have
+been bridged to IRC. You can join the channels here:
+
+[irc.libera.chat:6697](https://libera.chat/)
+
+`##polyphony.announcements`
+`##polyphony.community-updates`
+`##polyphony.chit-chat`
+`##polyphony.rustaeceans`
+`##polyphony.media`
+`#polyphony.discussion`
+`#polyphony.polyproto-discussion`
+`#polyphony.server-discussion`
+`#polyphony.chorus-discussion`
+
+(Yes, there is a distinction between `#` and `##`)
 
 ##### This project is not affiliated with Discord Inc. or any related companies.
 
@@ -77,4 +102,4 @@ Contributions are always welcome! Please read the [code of conduct](https://gith
 [Code-of-conduct-shield]: https://img.shields.io/badge/Code_of_Conduct-eb00ff
 [Code-of-conduct]: https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md
 
-> 🏳️‍⚧️ Trans rights are human rights.
+> 🏳️‍⚧️ Trans rights are human rights
