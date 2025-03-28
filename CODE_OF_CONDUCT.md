@@ -1,6 +1,9 @@
-# Contributor Code of Conduct
+# Polyphony Contributor Code of Conduct
 
-This code of conduct document is based on the Contributor Covenant Code of Conduct.
+This code of conduct document is based on the Contributor Covenant Code of Conduct. It has been
+updated to be even more in line with our core community values.
+
+Version v1.1.0
 
 ## Our Pledge
 
@@ -32,7 +35,7 @@ Examples of unacceptable behavior include:
 - Homo-, trans- and queerphobia, ableism and racism, even when "just a joke".
 - The use of sexualized language or imagery, and sexual attention or
   advances of any kind
-- Trolling, insulting or derogatory comments, and personal or political attacks
+- Trolling, insulting or derogatory comments, and personal (ad hominem) attacks
 - Public or private harassment
 - Publishing others' private information, such as a physical or email
   address, without their explicit permission
@@ -41,9 +44,9 @@ Examples of unacceptable behavior include:
 
 ### Our stance on using AI to generate images, video or music
 
-We disapprove of the usage of AI image and video generation within our community.
-This practice undermines artistic professions by devaluing human creativity, skill, and
-craftsmanship, which is already leading to job displacement within creative fields.
+We disapprove of the usage of AI image and video generation as well as the practice of "vibe coding"
+within our community. This practice undermines artistic professions by devaluing human creativity,
+skill, and craftsmanship, which is already leading to job displacement within creative fields.
 
 The training data used for these models is often obtained without the consent of artists, denying
 them their right of control over their work and any sort of financial compensation. This is
@@ -63,6 +66,9 @@ Community leaders have the right and responsibility to remove, edit, or reject
 comments, commits, code, wiki edits, issues, and other contributions and content
 that is not aligned to this Code of Conduct, and will communicate reasons for
 moderation decisions when they deem appropriate.
+
+All community members are responsible for staying vigilant. Report unacceptable behavior to
+community leaders and speak up against harassment.
 
 ## Scope
 
