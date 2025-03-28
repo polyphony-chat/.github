@@ -3,7 +3,7 @@
 This code of conduct document is based on the Contributor Covenant Code of Conduct. It has been
 updated to be even more in line with our core community values.
 
-Version v1.1.0
+Version v1.1.1
 
 ## Our Pledge
 
@@ -140,6 +140,8 @@ This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 2.0, available at
 https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
 
+It has been licensed to us under [the Creative Commons Attribution 4.0 International Public License](https://web.archive.org/web/20250323015123/https://github.com/EthicalSource/contributor_covenant/blob/release/LICENSE.md).
+
 Community Impact Guidelines were inspired by [Mozilla's code of conduct
 enforcement ladder](https://github.com/mozilla/diversity).
 
@@ -149,5 +151,5 @@ For answers to common questions about this code of conduct, you may refer to the
 https://www.contributor-covenant.org/faq. Translations are available at
 https://www.contributor-covenant.org/translations.
 
-Please consult the git history to see the individual changes that have been
+Changes have been made from the original version. Please consult the git history to see the individual changes that have been
 made from the original version of this Code of Conduct document.
