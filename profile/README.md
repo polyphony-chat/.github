@@ -3,6 +3,7 @@
 [![Discord]][Discord-invite]
 [![Status]][Status]
 [![Code-of-conduct-shield]][Code-of-conduct]
+[![FAQ-shield]][FAQ]
 
 </br>
 <a name="readme-top"></a>
@@ -101,5 +102,7 @@ been bridged to IRC. You can join the channels here:
 [Status]: https://img.shields.io/badge/Status-Early_Development-8100ad
 [Code-of-conduct-shield]: https://img.shields.io/badge/Code_of_Conduct-eb00ff
 [Code-of-conduct]: https://github.com/polyphony-chat/.github/blob/main/CODE_OF_CONDUCT.md
+[FAQ-shield]: https://img.shields.io/badge/Frequently_Asked_Questions_(FAQ)-ff62bd
+[FAQ]: https://github.com/polyphony-chat/.github/blob/main/FAQ.md
 
 > 🏳️‍⚧️ Trans rights are human rights
