@@ -3,7 +3,7 @@
 This code of conduct document is based on the Contributor Covenant Code of Conduct. It has been
 updated to be even more in line with our core community values.
 
-Version v1.1.1
+Version v1.2.0
 
 ## Our Pledge
 
@@ -24,6 +24,7 @@ community include:
 
 - Demonstrating empathy and kindness toward other people
 - Being respectful of differing opinions, viewpoints, and experiences
+- Being respectful of other peoples' identities and gender pronouns
 - Giving and gracefully accepting constructive feedback
 - Accepting responsibility and apologizing to those affected by our mistakes,
   and learning from the experience
@@ -42,11 +43,11 @@ Examples of unacceptable behavior include:
 - Other conduct which could reasonably be considered inappropriate in a
   professional setting. Goofing around is fine, but don't push your luck.
 
-### Our stance on using AI to generate images, video or music
+### Our stance on using AI to generate images, video, music and code
 
-We disapprove of the usage of AI image and video generation as well as the practice of "vibe coding"
-within our community. This practice undermines artistic professions by devaluing human creativity,
-skill, and craftsmanship, which is already leading to job displacement within creative fields.
+We disapprove of the usage of AI image and video generation within our community. This practice
+undermines artistic professions by devaluing human creativity, skill, and craftsmanship, which
+is already leading to job displacement within creative fields.
 
 The training data used for these models is often obtained without the consent of artists, denying
 them their right of control over their work and any sort of financial compensation. This is
@@ -54,6 +55,11 @@ simply unethical.
 
 As such, we do not condone the use or spreading of AI generated images, videos, or music in our work
 and our community.
+
+We will not accept code contributions derived through highly LLM-automated coding practices,
+commonly referred to as "vibe coding". We do not, however, place restrictions on the usage of
+LLMs to help you answer questions, learn new topics or help with debugging code you'd like
+to contribute.
 
 ## Enforcement Responsibilities
 
