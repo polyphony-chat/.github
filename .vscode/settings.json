@@ -1,0 +1,4 @@
+{
+	"languageToolLinter.languageTool.ignoredWordsInWorkspace": ["polyproto-chat"],
+	"languageToolLinter.languageTool.disabledRules": "UPPERCASE_SENTENCE_START"
+}
