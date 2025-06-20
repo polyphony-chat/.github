@@ -70,6 +70,7 @@ The following channels are bridged between Discord and IRC:
 `#polyphony.discussion`
 `#polyphony.polyproto-discussion`
 `#polyphony.server-discussion`
+`#polyphony.sonata-discussion`
 `#polyphony.chorus-discussion`
 
 (Yes, there is a distinction between `#` and `##`).
