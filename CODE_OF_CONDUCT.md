@@ -3,7 +3,7 @@
 This code of conduct document is based on the Contributor Covenant Code of Conduct. It has been
 updated to be even more in line with our core community values.
 
-Version v1.2.0
+Version v1.3.0
 
 ## Our Pledge
 
@@ -42,24 +42,34 @@ Examples of unacceptable behavior include:
   address, without their explicit permission
 - Other conduct which could reasonably be considered inappropriate in a
   professional setting. Goofing around is fine, but don't push your luck.
+- Actively advertising your own content without a community leaders' consent
+  outside of communication channels where this is explicitly allowed.
+  Sharing a repository, a software project or other content is always okay;
+  perceived intent matters.
+  
 
 ### Our stance on using AI to generate images, video, music and code
 
-We disapprove of the usage of AI image and video generation within our community. This practice
-undermines artistic professions by devaluing human creativity, skill, and craftsmanship, which
-is already leading to job displacement within creative fields.
+<details>
+  <summary>Expand to read</summary>
+  
+  We disapprove of the usage of AI image and video generation within our community. This practice
+  undermines artistic professions by devaluing human creativity, skill, and craftsmanship, which
+  is already leading to job displacement within creative fields.
+  
+  The training data used for these models is often obtained without the consent of artists, denying
+  them their right of control over their work and any sort of financial compensation. This is
+  simply unethical.
+  
+  As such, we do not condone the use or spreading of AI generated images, videos, or music in our work
+  and our community.
+  
+  We will not accept code contributions derived through highly LLM-automated coding practices,
+  commonly referred to as "vibe coding". We do not, however, place restrictions on the usage of
+  LLMs to help you answer questions, learn new topics or help with debugging code you'd like
+  to contribute.
 
-The training data used for these models is often obtained without the consent of artists, denying
-them their right of control over their work and any sort of financial compensation. This is
-simply unethical.
-
-As such, we do not condone the use or spreading of AI generated images, videos, or music in our work
-and our community.
-
-We will not accept code contributions derived through highly LLM-automated coding practices,
-commonly referred to as "vibe coding". We do not, however, place restrictions on the usage of
-LLMs to help you answer questions, learn new topics or help with debugging code you'd like
-to contribute.
+</details>
 
 ## Enforcement Responsibilities
 
@@ -159,3 +169,7 @@ https://www.contributor-covenant.org/translations.
 
 Changes have been made from the original version. Please consult the git history to see the individual changes that have been
 made from the original version of this Code of Conduct document.
+
+---
+
+🏳️‍⚧️🏳️‍🌈😺
